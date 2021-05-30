@@ -54,15 +54,7 @@ public class AnunciosActivity extends AppCompatActivity implements AnunciosContr
         setContentView(R.layout.activity_anuncios);
 
         inicializarComponentes();
-
-        //Configurações iniciais
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-
-        //Configurar RecyclerView
-        recyclerAnunciosPublicos.setLayoutManager(new LinearLayoutManager(this));
-        recyclerAnunciosPublicos.setHasFixedSize(true);
-        adapterAnuncios = new AdapterAnuncios(listaAnuncios, this);
-        recyclerAnunciosPublicos.setAdapter( adapterAnuncios );
+        recuperarAutenticacaoFirebase();
 
         presenter = new AnunciosPresenter(this);
 
@@ -234,6 +226,18 @@ public class AnunciosActivity extends AppCompatActivity implements AnunciosContr
 
     public void inicializarComponentes() {
         recyclerAnunciosPublicos = findViewById(R.id.recyclerAnunciosPublicos);
+        configurarRecycleView();
+    }
+
+    private void configurarRecycleView() {
+        recyclerAnunciosPublicos.setLayoutManager(new LinearLayoutManager(this));
+        recyclerAnunciosPublicos.setHasFixedSize(true);
+        adapterAnuncios = new AdapterAnuncios(listaAnuncios, this);
+        recyclerAnunciosPublicos.setAdapter( adapterAnuncios );
+    }
+
+    private void recuperarAutenticacaoFirebase() {
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
     }
 
     @Override
