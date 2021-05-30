@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -22,12 +21,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.santalu.maskedittext.MaskEditText;
 
 import java.util.ArrayList;
@@ -35,13 +28,14 @@ import java.util.List;
 import java.util.Locale;
 
 import br.com.mobile.segundaprova.vendafacil.R;
-import br.com.mobile.segundaprova.vendafacil.helper.ConfiguracaoFirebase;
+import br.com.mobile.segundaprova.vendafacil.helper.AnuncioUtils;
 import br.com.mobile.segundaprova.vendafacil.helper.Permissoes;
 import br.com.mobile.segundaprova.vendafacil.model.Anuncio;
+import br.com.mobile.segundaprova.vendafacil.ui.meusanuncios.MeusAnunciosActivity;
 import dmax.dialog.SpotsDialog;
 
 public class CadastrarAnuncioActivity extends AppCompatActivity
-            implements View.OnClickListener {
+            implements View.OnClickListener, CadastrarAnunciosContract.CadastrarAnunciosView {
 
     private EditText campoTitulo, campoDescricao;
     private ImageView imagem1, imagem2, imagem3;
@@ -49,29 +43,27 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
     private CurrencyEditText campoValor;
     private MaskEditText campoTelefone;
     private Anuncio anuncio;
-    private StorageReference storage;
     private AlertDialog dialog;
 
-    private String[] permissoes = new String[]{
+    private final String[] permissoes = new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA
     };
-    private List<String> listaFotosRecuperadas = new ArrayList<>();
-    private List<String> listaURLFotos = new ArrayList<>();
+    private final List<String> listaFotosRecuperadas = new ArrayList<>();
+
+    private CadastrarAnunciosContract.CadastrarAnunciosPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_anuncio);
 
-        //Configurações iniciais
-        storage = ConfiguracaoFirebase.getFirebaseStorage();
-
         //Validar permissões
         Permissoes.validarPermissoes(permissoes, this, 1);
 
         inicializarComponentes();
-        carregarDadosSpinner();
+        AnuncioUtils.carregarDadosSpinner(this, campoEstado, campoCategoria);
+        presenter = new CadastrarAnuncioPresenter(this);
     }
 
     public void salvarAnuncio(){
@@ -83,60 +75,9 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
                 .build();
         dialog.show();
 
-        /**
-         * Salvar imagem no Storage
-         */
-        for (int i=0; i < listaFotosRecuperadas.size(); i++){
-            String urlImagem = listaFotosRecuperadas.get(i);
-            int tamanhoLista = listaFotosRecuperadas.size();
-            salvarFotoStorage(urlImagem, tamanhoLista, i);
-        }
+        presenter.salvarAnuncio(anuncio, listaFotosRecuperadas);
     }
 
-    private void salvarFotoStorage(String urlString, final int totalFotos, int contador){
-
-        //Criar nó no storage
-        StorageReference imagemAnuncio = storage.child("imagens")
-                .child("anuncios")
-                .child( anuncio.getIdAnuncio() )
-                .child("imagem"+contador);
-
-        //Fazer upload do arquivo
-        UploadTask uploadTask = imagemAnuncio.putFile( Uri.parse(urlString) );
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                imagemAnuncio.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        Uri firebaseUrl = task.getResult();
-                        String urlConvertida = firebaseUrl != null ? firebaseUrl.toString() : "";
-
-                        if (!urlConvertida.isEmpty()) {
-                            urlConvertida.length();
-
-                            listaURLFotos.add(urlConvertida);
-                            if (totalFotos == listaURLFotos.size()) {
-                                anuncio.setFotos(listaURLFotos);
-                                anuncio.salvar();
-
-                                dialog.dismiss();
-                                finish();
-                            }
-
-                        }
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                exibirMensagemErro("Falha ao fazer upload");
-                Log.i("INFO", "Falha ao fazer upload: " + e.getMessage());
-            }
-        });
-    }
 
     private Anuncio configurarAnuncio(){
 
@@ -197,7 +138,23 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
         }
     }
 
-    private void exibirMensagemErro(String texto){
+    @Override
+    public void dismissDiolog() {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void finishActivity() {
+        finish();;
+    }
+
+    @Override
+    public void startActivity() {
+        startActivity(new Intent(getApplicationContext(), MeusAnunciosActivity.class));
+    }
+
+    @Override
+    public void exibirMensagemErro(String texto){
         Toast.makeText(this, texto, Toast.LENGTH_SHORT).show();
     }
 
@@ -244,31 +201,6 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
 
             listaFotosRecuperadas.add( caminhoImagem );
         }
-    }
-
-    private void carregarDadosSpinner(){
-
-        /*String[] estados = new String[]{
-          "SP", "MT"
-        };*/
-
-        //Configura spinner de estados
-        String[] estados = getResources().getStringArray(R.array.estados);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item,
-                estados
-        );
-        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
-        campoEstado.setAdapter( adapter );
-
-        //Configura spinner de categorias
-        String[] categorias = getResources().getStringArray(R.array.categorias);
-        ArrayAdapter<String> adapterCategoria = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item,
-                categorias
-        );
-        adapterCategoria.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
-        campoCategoria.setAdapter( adapterCategoria );
     }
 
     private void inicializarComponentes(){
