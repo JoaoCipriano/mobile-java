@@ -30,45 +30,25 @@ import br.com.mobile.segundaprova.vendafacil.ui.cadastraranuncio.CadastrarAnunci
 import br.com.mobile.segundaprova.vendafacil.ui.detalhesproduto.DetalhesProdutoActivity;
 import dmax.dialog.SpotsDialog;
 
-public class MeusAnunciosActivity extends AppCompatActivity {
+public class MeusAnunciosActivity extends AppCompatActivity implements MeusAnunciosContract.MeusAnunciosView {
 
     private RecyclerView recyclerAnuncios;
-    private List<Anuncio> anuncios = new ArrayList<>();
+    private List<Anuncio> meusAnuncios = new ArrayList<>();
     private AdapterAnuncios adapterAnuncios;
-    private DatabaseReference anuncioUsuarioRef;
     private AlertDialog dialog;
+
+    private MeusAnunciosContract.MeusAnunciosPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meus_anuncios);
 
-        //Configurações iniciais
-        anuncioUsuarioRef = ConfiguracaoFirebase.getFirebase()
-                .child("meus_anuncios")
-                .child( ConfiguracaoFirebase.getIdUsuario() );
-
         inicializarComponentes();
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), CadastrarAnuncioActivity.class));
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Configurar RecyclerView
-        recyclerAnuncios.setLayoutManager(new LinearLayoutManager(this));
-        recyclerAnuncios.setHasFixedSize(true);
-        adapterAnuncios = new AdapterAnuncios(anuncios, this);
-        recyclerAnuncios.setAdapter( adapterAnuncios );
+        presenter = new MeusAnunciosPresenter(this);
 
-        //Recupera anúncios para o usuário
         recuperarAnuncios();
 
         //Adiciona evento de clique no recyclerview
@@ -79,7 +59,7 @@ public class MeusAnunciosActivity extends AppCompatActivity {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                Anuncio anuncioSelecionado = anuncios.get( position );
+                                Anuncio anuncioSelecionado = meusAnuncios.get( position );
                                 anuncioSelecionado.setCanUpdate(true);
                                 Intent i = new Intent(MeusAnunciosActivity.this, DetalhesProdutoActivity.class);
                                 i.putExtra("anuncioSelecionado", anuncioSelecionado );
@@ -88,7 +68,7 @@ public class MeusAnunciosActivity extends AppCompatActivity {
 
                             @Override
                             public void onLongItemClick(View view, int position) {
-                                Anuncio anuncioSelecionado = anuncios.get(position);
+                                Anuncio anuncioSelecionado = meusAnuncios.get(position);
                                 anuncioSelecionado.remover();
                                 adapterAnuncios.notifyDataSetChanged();
                             }
@@ -110,26 +90,53 @@ public class MeusAnunciosActivity extends AppCompatActivity {
                 .build();
         dialog.show();
 
-        anuncioUsuarioRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                anuncios.clear();
-                for ( DataSnapshot ds : dataSnapshot.getChildren() ){
-                    anuncios.add( ds.getValue(Anuncio.class) );
-                }
-
-                Collections.reverse( anuncios );
-                adapterAnuncios.notifyDataSetChanged();
-                dialog.dismiss();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        meusAnuncios.clear();
+        presenter.recuperarAnuncios();
     }
 
     public void inicializarComponentes(){
         recyclerAnuncios = findViewById(R.id.recyclerAnuncios);
+
+        configurarRecycleView();
+        configurarToolbar();
+        configurarFloatingActionButton();
+    }
+
+    private void configurarRecycleView() {
+        recyclerAnuncios.setLayoutManager(new LinearLayoutManager(this));
+        recyclerAnuncios.setHasFixedSize(true);
+        adapterAnuncios = new AdapterAnuncios(meusAnuncios, this);
+        recyclerAnuncios.setAdapter( adapterAnuncios );
+    }
+
+    private void configurarToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    private void configurarFloatingActionButton() {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), CadastrarAnuncioActivity.class));
+            }
+        });
+    }
+
+    @Override
+    public void mostrarAnuncios(List<Anuncio> anuncios) {
+        meusAnuncios.addAll(anuncios);
+        adapterAnuncios.notifyDataSetChanged();
+    }
+
+    @Override
+    public void dismissDialog() {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void notifyDataSetChangedAdapter() {
+        adapterAnuncios.notifyDataSetChanged();
     }
 }
