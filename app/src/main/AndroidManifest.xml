@@ -17,28 +17,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VendaFacil">
-        <activity android:name=".activity.AnunciosActivity">
+        <activity android:name=".ui.anuncios.AnunciosActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CadastroActivity" />
+        <activity android:name=".ui.cadastro.CadastroActivity" />
         <activity
-            android:name=".activity.MeusAnunciosActivity"
+            android:name=".ui.meusanuncios.MeusAnunciosActivity"
             android:label="@string/title_activity_meus_anuncios"
-            android:parentActivityName=".activity.AnunciosActivity"
+            android:parentActivityName=".ui.anuncios.AnunciosActivity"
             android:theme="@style/Theme.VendaFacil.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.mobile.segundaprova.vendafacil.activity.AnunciosActivity" />
+                android:value="br.com.mobile.segundaprova.vendafacil.ui.anuncios.AnunciosActivity" />
         </activity>
-        <activity android:name=".activity.CadastrarAnuncioActivity" />
+        <activity android:name=".ui.cadastraranuncio.CadastrarAnuncioActivity" />
         <activity
-            android:name=".activity.DetalhesProdutoActivity"
-            android:parentActivityName=".activity.AnunciosActivity" />
-        <activity android:name=".activity.EditarAnuncioActivity" />
+            android:name=".ui.detalhesproduto.DetalhesProdutoActivity"
+            android:parentActivityName=".ui.anuncios.AnunciosActivity" />
+        <activity android:name=".ui.editaranuncio.EditarAnuncioActivity" />
     </application>
 
 </manifest>

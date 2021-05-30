@@ -1,4 +1,4 @@
-package br.com.mobile.segundaprova.vendafacil.activity;
+package br.com.mobile.segundaprova.vendafacil.ui.editaranuncio;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -23,6 +23,7 @@ import br.com.mobile.segundaprova.vendafacil.R;
 import br.com.mobile.segundaprova.vendafacil.helper.AnuncioUtils;
 import br.com.mobile.segundaprova.vendafacil.model.Anuncio;
 import br.com.mobile.segundaprova.vendafacil.model.TipoSpinner;
+import br.com.mobile.segundaprova.vendafacil.ui.meusanuncios.MeusAnunciosActivity;
 
 public class EditarAnuncioActivity extends AppCompatActivity {
 

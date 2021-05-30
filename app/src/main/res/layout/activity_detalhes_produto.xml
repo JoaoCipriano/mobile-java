@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="br.com.mobile.segundaprova.vendafacil.activity.DetalhesProdutoActivity">
+    tools:context="br.com.mobile.segundaprova.vendafacil.ui.detalhesproduto.DetalhesProdutoActivity">
 
     <com.synnapps.carouselview.CarouselView
         android:id="@+id/carouselView"

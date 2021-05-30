@@ -1,4 +1,4 @@
-package br.com.mobile.segundaprova.vendafacil.activity;
+package br.com.mobile.segundaprova.vendafacil.ui.cadastraranuncio;
 
 import android.Manifest;
 import android.app.Activity;

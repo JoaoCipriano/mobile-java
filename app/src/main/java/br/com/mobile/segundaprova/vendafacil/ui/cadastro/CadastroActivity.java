@@ -1,4 +1,4 @@
-package br.com.mobile.segundaprova.vendafacil.activity;
+package br.com.mobile.segundaprova.vendafacil.ui.cadastro;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import br.com.mobile.segundaprova.vendafacil.R;
 import br.com.mobile.segundaprova.vendafacil.helper.ConfiguracaoFirebase;
+import br.com.mobile.segundaprova.vendafacil.ui.anuncios.AnunciosActivity;
 
 public class CadastroActivity extends AppCompatActivity {
 

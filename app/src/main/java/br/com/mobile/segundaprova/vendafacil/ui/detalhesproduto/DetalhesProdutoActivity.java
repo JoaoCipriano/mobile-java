@@ -1,4 +1,4 @@
-package br.com.mobile.segundaprova.vendafacil.activity;
+package br.com.mobile.segundaprova.vendafacil.ui.detalhesproduto;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +16,7 @@ import com.synnapps.carouselview.ImageListener;
 
 import br.com.mobile.segundaprova.vendafacil.R;
 import br.com.mobile.segundaprova.vendafacil.model.Anuncio;
+import br.com.mobile.segundaprova.vendafacil.ui.editaranuncio.EditarAnuncioActivity;
 
 public class DetalhesProdutoActivity extends AppCompatActivity {
 

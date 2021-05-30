@@ -1,4 +1,4 @@
-package br.com.mobile.segundaprova.vendafacil.activity;
+package br.com.mobile.segundaprova.vendafacil.ui.anuncios;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,13 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import br.com.mobile.segundaprova.vendafacil.R;
@@ -32,9 +28,12 @@ import br.com.mobile.segundaprova.vendafacil.adapter.AdapterAnuncios;
 import br.com.mobile.segundaprova.vendafacil.helper.ConfiguracaoFirebase;
 import br.com.mobile.segundaprova.vendafacil.helper.RecyclerItemClickListener;
 import br.com.mobile.segundaprova.vendafacil.model.Anuncio;
+import br.com.mobile.segundaprova.vendafacil.ui.cadastro.CadastroActivity;
+import br.com.mobile.segundaprova.vendafacil.ui.detalhesproduto.DetalhesProdutoActivity;
+import br.com.mobile.segundaprova.vendafacil.ui.meusanuncios.MeusAnunciosActivity;
 import dmax.dialog.SpotsDialog;
 
-public class AnunciosActivity extends AppCompatActivity {
+public class AnunciosActivity extends AppCompatActivity implements AnunciosContract.AnunciosView {
 
     private FirebaseAuth autenticacao;
     private RecyclerView recyclerAnunciosPublicos;
@@ -47,6 +46,8 @@ public class AnunciosActivity extends AppCompatActivity {
     private String filtroCategoria = "";
     private boolean filtrandoPorEstado = false;
 
+    private AnunciosContract.AnunciosPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,14 +57,14 @@ public class AnunciosActivity extends AppCompatActivity {
 
         //Configurações iniciais
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        anunciosPublicosRef = ConfiguracaoFirebase.getFirebase()
-                .child("anuncios");
 
         //Configurar RecyclerView
         recyclerAnunciosPublicos.setLayoutManager(new LinearLayoutManager(this));
         recyclerAnunciosPublicos.setHasFixedSize(true);
         adapterAnuncios = new AdapterAnuncios(listaAnuncios, this);
         recyclerAnunciosPublicos.setAdapter( adapterAnuncios );
+
+        presenter = new AnunciosPresenter(this);
 
         recuperarAnunciosPublicos();
 
@@ -177,60 +178,13 @@ public class AnunciosActivity extends AppCompatActivity {
     }
 
     public void recuperarAnunciosPorEstado(){
-        //Configura nó por estado
-        anunciosPublicosRef = ConfiguracaoFirebase.getFirebase()
-                .child("anuncios")
-                .child(filtroEstado);
-
-        anunciosPublicosRef.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listaAnuncios.clear();
-                for (DataSnapshot categorias: dataSnapshot.getChildren() ){
-                    for(DataSnapshot anuncios: categorias.getChildren() ){
-
-                        Anuncio anuncio = anuncios.getValue(Anuncio.class);
-                        listaAnuncios.add( anuncio );
-                    }
-                }
-
-                Collections.reverse( listaAnuncios );
-                adapterAnuncios.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
+        listaAnuncios.clear();
+        presenter.recuperarAnunciosPorEstado(filtroEstado);
     }
 
     public void recuperarAnunciosPorCategoria(){
-        //Configura nó por categoria
-        anunciosPublicosRef = ConfiguracaoFirebase.getFirebase()
-                .child("anuncios")
-                .child(filtroEstado)
-                .child( filtroCategoria );
-
-        anunciosPublicosRef.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listaAnuncios.clear();
-                for(DataSnapshot anuncios: dataSnapshot.getChildren() ){
-
-                    Anuncio anuncio = anuncios.getValue(Anuncio.class);
-                    listaAnuncios.add( anuncio );
-                }
-
-                Collections.reverse( listaAnuncios );
-                adapterAnuncios.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
+        listaAnuncios.clear();
+        presenter.recuperarAnunciosPorCategoria(filtroEstado, filtroCategoria);
     }
 
     public void recuperarAnunciosPublicos() {
@@ -242,29 +196,7 @@ public class AnunciosActivity extends AppCompatActivity {
         dialog.show();
 
         listaAnuncios.clear();
-        anunciosPublicosRef.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot estados: dataSnapshot.getChildren()){
-                    for (DataSnapshot categorias: estados.getChildren() ){
-                        for(DataSnapshot anuncios: categorias.getChildren() ){
-
-                            Anuncio anuncio = anuncios.getValue(Anuncio.class);
-                            listaAnuncios.add( anuncio );
-                        }
-                    }
-                }
-                Collections.reverse( listaAnuncios );
-                adapterAnuncios.notifyDataSetChanged();
-                dialog.dismiss();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        presenter.recuperarAnunciosPublicos();
     }
 
     @Override
@@ -302,5 +234,22 @@ public class AnunciosActivity extends AppCompatActivity {
 
     public void inicializarComponentes() {
         recyclerAnunciosPublicos = findViewById(R.id.recyclerAnunciosPublicos);
+    }
+
+    @Override
+    public void mostrarAnuncios(List<Anuncio> anuncios) {
+        listaAnuncios.addAll(anuncios);
+        adapterAnuncios.notifyDataSetChanged();
+    }
+
+    @Override
+    public void dismissDiolog() {
+        dialog.dismiss();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.destruirView();
     }
 }

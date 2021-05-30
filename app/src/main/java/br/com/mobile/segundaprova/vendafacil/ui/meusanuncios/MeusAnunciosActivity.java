@@ -1,4 +1,4 @@
-package br.com.mobile.segundaprova.vendafacil.activity;
+package br.com.mobile.segundaprova.vendafacil.ui.meusanuncios;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -26,6 +26,8 @@ import br.com.mobile.segundaprova.vendafacil.adapter.AdapterAnuncios;
 import br.com.mobile.segundaprova.vendafacil.helper.ConfiguracaoFirebase;
 import br.com.mobile.segundaprova.vendafacil.helper.RecyclerItemClickListener;
 import br.com.mobile.segundaprova.vendafacil.model.Anuncio;
+import br.com.mobile.segundaprova.vendafacil.ui.cadastraranuncio.CadastrarAnuncioActivity;
+import br.com.mobile.segundaprova.vendafacil.ui.detalhesproduto.DetalhesProdutoActivity;
 import dmax.dialog.SpotsDialog;
 
 public class MeusAnunciosActivity extends AppCompatActivity {
