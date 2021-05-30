@@ -1,11 +1,7 @@
 package br.com.mobile.segundaprova.vendafacil.ui.cadastraranuncio;
 
-import android.content.Context;
-import android.view.View;
-
 import java.util.List;
 
-import br.com.mobile.segundaprova.vendafacil.dto.NovoAnuncioDTO;
 import br.com.mobile.segundaprova.vendafacil.model.Anuncio;
 
 public interface CadastrarAnunciosContract {
