@@ -17,8 +17,9 @@ import com.synnapps.carouselview.ImageListener;
 import br.com.mobile.segundaprova.vendafacil.R;
 import br.com.mobile.segundaprova.vendafacil.model.Anuncio;
 import br.com.mobile.segundaprova.vendafacil.ui.editaranuncio.EditarAnuncioActivity;
+import br.com.mobile.segundaprova.vendafacil.ui.meusanuncios.MeusAnunciosActivity;
 
-public class DetalhesProdutoActivity extends AppCompatActivity {
+public class DetalhesProdutoActivity extends AppCompatActivity  implements DetalhesProdutoContract.DetalhesProdutoView {
 
     private CarouselView carouselView;
     private TextView titulo;
@@ -27,6 +28,9 @@ public class DetalhesProdutoActivity extends AppCompatActivity {
     private TextView preco;
     private Anuncio anuncioSelecionado;
     private Button editarAnuncio;
+    private Button apagarAnuncio;
+
+    private DetalhesProdutoContract.DetalhesProdutoPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,8 @@ public class DetalhesProdutoActivity extends AppCompatActivity {
 
         //Recupera anúncio para exibicao
         anuncioSelecionado = (Anuncio) getIntent().getSerializableExtra("anuncioSelecionado");
+
+        presenter = new DetalhesProdutoPresenter(this);
 
         if( anuncioSelecionado != null ) {
             titulo.setText( anuncioSelecionado.getTitulo() );
@@ -58,8 +64,8 @@ public class DetalhesProdutoActivity extends AppCompatActivity {
             carouselView.setPageCount( anuncioSelecionado.getFotos().size() );
             carouselView.setImageListener( imageListener );
 
-            if (anuncioSelecionado.isCanUpdate())
-                habilitarButtonEditarAnuncio();
+            if (anuncioSelecionado.isOwner())
+                habilitarButtonsEditarApagarAnuncio();
         }
     }
 
@@ -74,8 +80,13 @@ public class DetalhesProdutoActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    private void habilitarButtonEditarAnuncio() {
+    public void apagarAnuncio(View view) {
+        presenter.apagarAnuncio(anuncioSelecionado);
+    }
+
+    private void habilitarButtonsEditarApagarAnuncio() {
         editarAnuncio.setVisibility(View.VISIBLE);
+        apagarAnuncio.setVisibility(View.VISIBLE);
     }
 
     private void inicializarComponentes(){
@@ -85,5 +96,11 @@ public class DetalhesProdutoActivity extends AppCompatActivity {
         estado = findViewById(R.id.textEstadoDetalhe);
         preco = findViewById(R.id.textPrecoDetalhe);
         editarAnuncio = findViewById(R.id.buttonEditarAnuncio);
+        apagarAnuncio = findViewById(R.id.buttonApagarAnuncio);
+    }
+
+    @Override
+    public void startActivity() {
+        startActivity(new Intent(this, MeusAnunciosActivity.class));
     }
 }

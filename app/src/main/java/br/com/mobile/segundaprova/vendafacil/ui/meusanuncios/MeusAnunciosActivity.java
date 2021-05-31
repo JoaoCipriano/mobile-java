@@ -12,18 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import br.com.mobile.segundaprova.vendafacil.R;
 import br.com.mobile.segundaprova.vendafacil.adapter.AdapterAnuncios;
-import br.com.mobile.segundaprova.vendafacil.helper.ConfiguracaoFirebase;
 import br.com.mobile.segundaprova.vendafacil.helper.RecyclerItemClickListener;
 import br.com.mobile.segundaprova.vendafacil.model.Anuncio;
 import br.com.mobile.segundaprova.vendafacil.ui.cadastraranuncio.CadastrarAnuncioActivity;
@@ -60,7 +54,7 @@ public class MeusAnunciosActivity extends AppCompatActivity implements MeusAnunc
                             @Override
                             public void onItemClick(View view, int position) {
                                 Anuncio anuncioSelecionado = meusAnuncios.get( position );
-                                anuncioSelecionado.setCanUpdate(true);
+                                anuncioSelecionado.setOwner(true);
                                 Intent i = new Intent(MeusAnunciosActivity.this, DetalhesProdutoActivity.class);
                                 i.putExtra("anuncioSelecionado", anuncioSelecionado );
                                 startActivity( i );
@@ -68,9 +62,6 @@ public class MeusAnunciosActivity extends AppCompatActivity implements MeusAnunc
 
                             @Override
                             public void onLongItemClick(View view, int position) {
-                                Anuncio anuncioSelecionado = meusAnuncios.get(position);
-                                anuncioSelecionado.remover();
-                                adapterAnuncios.notifyDataSetChanged();
                             }
 
                             @Override

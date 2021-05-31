@@ -16,7 +16,7 @@ public class Anuncio implements Serializable {
     private String telefone;
     private String descricao;
     private List<String> fotos;
-    private boolean canUpdate = false;
+    private boolean isOwner = false;
 
     public Anuncio() {
         DatabaseReference anuncioRef = ConfiguracaoFirebase.getFirebase()
@@ -139,11 +139,11 @@ public class Anuncio implements Serializable {
         this.fotos = fotos;
     }
 
-    public boolean isCanUpdate() {
-        return canUpdate;
+    public boolean isOwner() {
+        return isOwner;
     }
 
-    public void setCanUpdate(boolean canUpdate) {
-        this.canUpdate = canUpdate;
+    public void setOwner(boolean owner) {
+        isOwner = owner;
     }
 }
