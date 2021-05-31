@@ -1,6 +1,5 @@
 package br.com.mobile.segundaprova.vendafacil.ui.editaranuncio;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
-import com.google.firebase.storage.StorageReference;
 import com.santalu.maskedittext.MaskEditText;
 
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ import br.com.mobile.segundaprova.vendafacil.model.Anuncio;
 import br.com.mobile.segundaprova.vendafacil.model.TipoSpinner;
 import br.com.mobile.segundaprova.vendafacil.ui.meusanuncios.MeusAnunciosActivity;
 
-public class EditarAnuncioActivity extends AppCompatActivity {
+public class EditarAnuncioActivity extends AppCompatActivity implements EditarAnuncioContract.EditarAnuncioView {
 
     private Anuncio anuncioSelecionado;
 
@@ -34,8 +32,8 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     private CurrencyEditText campoValor;
     private MaskEditText campoTelefone;
     private Anuncio anuncio;
-    private StorageReference storage;
-    private AlertDialog dialog;
+
+    private EditarAnuncioContract.EditarAnuncioPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +42,13 @@ public class EditarAnuncioActivity extends AppCompatActivity {
 
         //Recuperar anúncio para atualizacao
         anuncioSelecionado = (Anuncio) getIntent().getSerializableExtra("anuncioSelecionado");
-
         //Inicializar componentes de interface
         inicializarComponentes();
         carregarDadosSpinner();
 
         carregarDadosAnuncioSelecionado();
+
+        presenter = new EditarAnuncioPresenter(this);
     }
 
     public void AtualizarDadosAnuncio(View view) {
@@ -57,9 +56,7 @@ public class EditarAnuncioActivity extends AppCompatActivity {
     }
 
     public void atualizarAnuncio() {
-        anuncioSelecionado.remover();
-        anuncio.salvar();
-        startActivity(new Intent(this, MeusAnunciosActivity.class));
+        presenter.atualizarAnuncio(anuncioSelecionado, anuncio);
     }
 
     public void validarDadosAnuncio(View view){
@@ -159,5 +156,10 @@ public class EditarAnuncioActivity extends AppCompatActivity {
         //Configura localidade para pt -> portugues BR -> Brasil
         Locale locale = new Locale("pt", "BR");
         campoValor.setLocale( locale );
+    }
+
+    @Override
+    public void startActivity() {
+        startActivity(new Intent(this, MeusAnunciosActivity.class));
     }
 }
