@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.mobile.segundaprova.vendafacil.model.Anuncio;
 
-public interface CadastrarAnunciosContract {
+public interface CadastrarAnuncioContract {
 
     interface CadastrarAnunciosView {
 

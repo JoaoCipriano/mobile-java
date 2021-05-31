@@ -35,7 +35,7 @@ import br.com.mobile.segundaprova.vendafacil.ui.meusanuncios.MeusAnunciosActivit
 import dmax.dialog.SpotsDialog;
 
 public class CadastrarAnuncioActivity extends AppCompatActivity
-            implements View.OnClickListener, CadastrarAnunciosContract.CadastrarAnunciosView {
+            implements View.OnClickListener, CadastrarAnuncioContract.CadastrarAnunciosView {
 
     private EditText campoTitulo, campoDescricao;
     private ImageView imagem1, imagem2, imagem3;
@@ -51,7 +51,7 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
     };
     private final List<String> listaFotosRecuperadas = new ArrayList<>();
 
-    private CadastrarAnunciosContract.CadastrarAnunciosPresenter presenter;
+    private CadastrarAnuncioContract.CadastrarAnunciosPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

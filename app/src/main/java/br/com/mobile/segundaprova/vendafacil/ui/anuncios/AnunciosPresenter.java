@@ -42,8 +42,10 @@ public class AnunciosPresenter implements AnunciosContract.AnunciosPresenter {
                     }
                 }
                 Collections.reverse( listaAnuncios );
-                view.mostrarAnuncios(listaAnuncios);
-                view.dismissDiolog();
+                if (view != null) {
+                    view.mostrarAnuncios(listaAnuncios);
+                    view.dismissDiolog();
+                }
             }
 
             @Override

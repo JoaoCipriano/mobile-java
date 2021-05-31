@@ -18,14 +18,14 @@ import java.util.List;
 import br.com.mobile.segundaprova.vendafacil.helper.ConfiguracaoFirebase;
 import br.com.mobile.segundaprova.vendafacil.model.Anuncio;
 
-public class CadastrarAnuncioPresenter implements CadastrarAnunciosContract.CadastrarAnunciosPresenter {
+public class CadastrarAnuncioPresenter implements CadastrarAnuncioContract.CadastrarAnunciosPresenter {
 
-    private CadastrarAnunciosContract.CadastrarAnunciosView view;
+    private CadastrarAnuncioContract.CadastrarAnunciosView view;
     private StorageReference storage;
     private Anuncio anuncio;
     private List<String> listaURLFotos = new ArrayList<>();
 
-    public CadastrarAnuncioPresenter(CadastrarAnunciosContract.CadastrarAnunciosView view) {
+    public CadastrarAnuncioPresenter(CadastrarAnuncioContract.CadastrarAnunciosView view) {
         this.view = view;
         storage = ConfiguracaoFirebase.getFirebaseStorage();
     }
