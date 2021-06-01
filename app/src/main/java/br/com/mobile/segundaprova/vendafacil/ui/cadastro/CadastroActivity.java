@@ -12,10 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import br.com.mobile.segundaprova.vendafacil.R;
 import br.com.mobile.segundaprova.vendafacil.ui.anuncios.AnunciosActivity;
+import br.com.mobile.segundaprova.vendafacil.ui.sobre.SobreActivity;
 
 public class CadastroActivity extends AppCompatActivity implements CadastroContract.CadastroView {
 
     private Button botaoAcessar;
+    private Button botaoSobre;
     private EditText campoEmail, campoSenha;
     private Switch tipoAcesso;
 
@@ -56,12 +58,23 @@ public class CadastroActivity extends AppCompatActivity implements CadastroContr
                 }
             }
         });
+
+        botaoSobre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getApplicationContext(), SobreActivity.class);
+                startActivity(it);
+            }
+        });
     }
+
+
 
     private void inicializaComponentes() {
         campoEmail = findViewById(R.id.editCadastroEmail);
         campoSenha = findViewById(R.id.editCadastroSenha);
         botaoAcessar = findViewById(R.id.buttonAcesso);
+        botaoSobre = findViewById(R.id.buttonSobre);
         tipoAcesso = findViewById(R.id.switchAcesso);
     }
 

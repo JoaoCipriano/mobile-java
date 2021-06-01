@@ -72,4 +72,11 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="Acessar" />
+
+    <Button
+        android:id="@+id/buttonSobre"
+        android:layout_width="103dp"
+        android:layout_height="38dp"
+        android:text="sobre"
+        android:textSize="10sp" />
 </LinearLayout>
