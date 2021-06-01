@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.blackcat.currencyedittext.CurrencyEditText;
 import com.santalu.maskedittext.MaskEditText;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -50,6 +52,11 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
             Manifest.permission.CAMERA
     };
     private final List<String> listaFotosRecuperadas = new ArrayList<>();
+    private byte[] dadosFoto = {};
+
+    private static final int SELECAO_CAMERA = 10;
+    private static final int SELECAO_GALERIA_1 = 20;
+    private static final int SELECAO_GALERIA_2 = 30;
 
     private CadastrarAnuncioContract.CadastrarAnunciosPresenter presenter;
 
@@ -75,7 +82,7 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
                 .build();
         dialog.show();
 
-        presenter.salvarAnuncio(anuncio, listaFotosRecuperadas);
+        presenter.salvarAnuncio(anuncio, listaFotosRecuperadas, dadosFoto);
     }
 
 
@@ -105,7 +112,7 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
         anuncio = configurarAnuncio();
         String valor = String.valueOf(campoValor.getRawValue());
 
-        if( listaFotosRecuperadas.size() != 0  ){
+        if( isHasAnImageOrPhoto() ){
             if( !anuncio.getEstado().isEmpty() ){
                 if( !anuncio.getCategoria().isEmpty() ){
                     if( !anuncio.getTitulo().isEmpty() ){
@@ -138,6 +145,10 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
         }
     }
 
+    private boolean isHasAnImageOrPhoto() {
+        return listaFotosRecuperadas != null && (listaFotosRecuperadas.size() != 0 || dadosFoto.length > 0);
+    }
+
     @Override
     public void dismissDiolog() {
         dialog.dismiss();
@@ -163,14 +174,13 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
         Log.d("onClick", "onClick: " + v.getId() );
         switch ( v.getId() ){
             case R.id.imageCadastro1 :
-                Log.d("onClick", "onClick: " );
-                escolherImagem(1);
+                tirarFoto(SELECAO_CAMERA);
                 break;
             case R.id.imageCadastro2 :
-                escolherImagem(2);
+                escolherImagem(SELECAO_GALERIA_1);
                 break;
             case R.id.imageCadastro3 :
-                escolherImagem(3);
+                escolherImagem(SELECAO_GALERIA_2);
                 break;
         }
     }
@@ -180,26 +190,44 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
         startActivityForResult(i, requestCode);
     }
 
+    public void tirarFoto(int requestCode) {
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Caso seja possível resolver a chamada de abrir a câmera
+        if (i.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(i, requestCode);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if( resultCode == Activity.RESULT_OK){
+        if( resultCode == Activity.RESULT_OK) {
 
-            //Recuperar imagem
-            Uri imagemSelecionada = data.getData();
-            String caminhoImagem = imagemSelecionada.toString();
+            if (requestCode != SELECAO_CAMERA) {
+                Uri imagemSelecionada = data.getData();
+                String caminhoImagem = imagemSelecionada.toString();
 
-            //Configura imagem no ImageView
-            if( requestCode == 1 ){
-                imagem1.setImageURI( imagemSelecionada );
-            }else if( requestCode == 2 ){
-                imagem2.setImageURI( imagemSelecionada );
-            }else if( requestCode == 3 ){
-                imagem3.setImageURI( imagemSelecionada );
+                if( requestCode == SELECAO_GALERIA_1 ) {
+                    imagem2.setImageURI( imagemSelecionada );
+
+                }else if( requestCode == SELECAO_GALERIA_2 ) {
+                    imagem3.setImageURI( imagemSelecionada );
+                }
+
+                listaFotosRecuperadas.add( caminhoImagem );
+
+            } else if (requestCode == SELECAO_CAMERA) {
+
+                Bitmap imagem = null;
+                imagem = (Bitmap) data.getExtras().get("data");
+                imagem1.setImageBitmap(imagem);
+
+                //Recuperar dados da imagem para o firebase
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                imagem.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+                dadosFoto = baos.toByteArray();
             }
-
-            listaFotosRecuperadas.add( caminhoImagem );
         }
     }
 

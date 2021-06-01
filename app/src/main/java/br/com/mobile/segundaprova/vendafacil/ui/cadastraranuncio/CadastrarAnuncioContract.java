@@ -20,7 +20,7 @@ public interface CadastrarAnuncioContract {
 
     interface CadastrarAnunciosPresenter {
 
-        void salvarAnuncio(Anuncio anuncio, List<String> listaFotosRecuperadas);
+        void salvarAnuncio(Anuncio anuncio, List<String> listaFotosRecuperadas, byte[] dadosFoto);
 
     }
 }
