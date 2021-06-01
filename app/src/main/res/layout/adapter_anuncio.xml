@@ -33,7 +33,7 @@
                 android:id="@+id/textTitulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tv LCD philips 47 polegadas dasd"
+                android:text="@string/tv_lcd_philips_47_polegadas_dasd"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 

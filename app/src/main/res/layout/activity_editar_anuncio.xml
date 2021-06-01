@@ -34,7 +34,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
-        android:hint="Título"
+        android:hint="@string/titulo"
         android:inputType="textPersonName"
         android:padding="10dp" />
 
@@ -45,7 +45,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
-        android:hint="R$ 20,50"
+        android:hint="@string/r_20_50"
         android:inputType="textPersonName"
         android:padding="10dp" />
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_edit_text"
-        android:hint="Telefone"
+        android:hint="@string/telefone"
         android:inputType="phone"
         android:padding="10dp"
         app:met_mask="(##) #####-####" />
@@ -67,7 +67,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
-        android:hint="Descrição"
+        android:hint="@string/descricao"
         android:inputType="textPersonName"
         android:padding="10dp" />
 
@@ -76,5 +76,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="AtualizarDadosAnuncio"
-        android:text="salvar alterações" />
+        android:text="@string/salvar_alteracoes" />
 </LinearLayout>

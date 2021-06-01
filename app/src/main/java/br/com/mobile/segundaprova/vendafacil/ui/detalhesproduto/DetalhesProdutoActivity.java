@@ -38,12 +38,12 @@ public class DetalhesProdutoActivity extends AppCompatActivity  implements Detal
         setContentView(R.layout.activity_detalhes_produto);
 
         //Configurar toolbar
-        getSupportActionBar().setTitle("Detalhe produto");
+        getSupportActionBar().setTitle(R.string.detalhes_do_produto);
 
         inicializarComponentes();
 
         //Recupera anúncio para exibicao
-        anuncioSelecionado = (Anuncio) getIntent().getSerializableExtra("anuncioSelecionado");
+        anuncioSelecionado = (Anuncio) getIntent().getSerializableExtra(getString(R.string.anuncio_selecionado));
 
         presenter = new DetalhesProdutoPresenter(this);
 
@@ -76,7 +76,7 @@ public class DetalhesProdutoActivity extends AppCompatActivity  implements Detal
 
     public void editarAnuncio(View view) {
         Intent i = new Intent(getApplicationContext(), EditarAnuncioActivity.class);
-        i.putExtra("anuncioSelecionado", anuncioSelecionado );
+        i.putExtra(getString(R.string.anuncio_selecionado), anuncioSelecionado );
         startActivity(i);
     }
 

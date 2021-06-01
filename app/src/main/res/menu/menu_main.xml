@@ -5,16 +5,16 @@
     <group android:id="@+id/group_logado" android:visible="false" >
 
         <item android:id="@+id/menu_anuncios"
-            android:title="Meus anúncios" />
+            android:title="@string/meus_anuncios" />
 
         <item android:id="@+id/menu_sair"
-            android:title="Sair" />
+            android:title="@string/sair" />
 
     </group>
 
     <group android:id="@+id/group_deslogado" android:visible="false" >
         <item android:id="@+id/menu_cadastrar"
-            android:title="Cadastrar / Entrar"
+            android:title="@string/cadastrar_entrar"
             app:showAsAction="always"/>
     </group>
 

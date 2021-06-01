@@ -77,7 +77,7 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
 
         dialog = new SpotsDialog.Builder()
                 .setContext( this )
-                .setMessage("Salvando Anúncio")
+                .setMessage(R.string.salvando_anuncio)
                 .setCancelable( false )
                 .build();
         dialog.show();
@@ -123,25 +123,25 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
                                     salvarAnuncio();
 
                                 }else {
-                                    exibirMensagemErro("Preencha o campo descrição");
+                                    exibirMensagemErro(getString(R.string.preencha_o_campo_descricao));
                                 }
                             }else {
-                                exibirMensagemErro("Preencha o campo telefone");
+                                exibirMensagemErro(getString(R.string.preencha_o_campo_telefone));
                             }
                         }else {
-                            exibirMensagemErro("Preencha o campo valor");
+                            exibirMensagemErro(getString(R.string.preencha_o_campo_valor));
                         }
                     }else {
-                        exibirMensagemErro("Preencha o campo título");
+                        exibirMensagemErro(getString(R.string.preencha_o_campo_titulo));
                     }
                 }else {
-                    exibirMensagemErro("Preencha o campo categoria");
+                    exibirMensagemErro(getString(R.string.preencha_o_campo_categoria));
                 }
             }else {
-                exibirMensagemErro("Preencha o campo estado");
+                exibirMensagemErro(getString(R.string.preencha_o_campo_estado));
             }
         }else {
-            exibirMensagemErro("Selecione ao menos uma foto!");
+            exibirMensagemErro(getString(R.string.selecione_pelo_menos_uma_foto));
         }
     }
 
@@ -265,10 +265,10 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
     private void alertaValidacaoPermissao(){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Permissões Negadas");
-        builder.setMessage("Para utilizar o app é necessário aceitar as permissões");
+        builder.setTitle(R.string.permicoes_negadas);
+        builder.setMessage(R.string.necessario_aceitar_permissoes);
         builder.setCancelable(false);
-        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.confimar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();

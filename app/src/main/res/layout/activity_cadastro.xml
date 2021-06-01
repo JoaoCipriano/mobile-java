@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:padding="10dp" />
 
@@ -34,7 +34,7 @@
         android:layout_marginTop="-2dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
-        android:hint="Senha"
+        android:hint="@string/senha"
         android:inputType="textPassword"
         android:padding="10dp" />
 
@@ -50,7 +50,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Logar" />
+            android:text="@string/login" />
 
         <Switch
             android:id="@+id/switchAcesso"
@@ -63,7 +63,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cadastra-se" />
+            android:text="@string/cadastrar_se" />
     </LinearLayout>
 
     <Button
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="Acessar" />
+        android:text="@string/acessar" />
 
     <Button
         android:id="@+id/buttonSobre"

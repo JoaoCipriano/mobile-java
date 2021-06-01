@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Easy Sale</string>
+    <string name="title_activity_meus_anuncios">My Ads</string>
+    <string name="regiao">Region</string>
+    <string name="categoria">Category</string>
+    <string name="titulo">Title</string>
+    <string name="telefone">Telephone</string>
+    <string name="descricao">Description</string>
+    <string name="cadastrar_anuncio">Register ad</string>
+    <string name="email">Email</string>
+    <string name="senha">Password</string>
+    <string name="login">Login</string>
+    <string name="cadastrar_se">Sign up</string>
+    <string name="acessar">Access</string>
+    <string name="editar">Edit</string>
+    <string name="apagar">Delete</string>
+    <string name="salvar_alteracoes">Save editions</string>
+    <string name="tv_lcd_philips_47_polegadas_dasd">philips LCD TV 47 inches dasd</string>
+    <string name="selecione_o_estado_desejado">Select the desired state</string>
+    <string name="selecione_a_categoria_desejada">Select the desired category</string>
+    <string name="recuperando_anuncios">Retrieving Ads</string>
+    <string name="escolha_primeiro_uma_regiao">Choose a region first!</string>
+    <string name="cancelar">Cancel</string>
+    <string name="salvando_anuncio">saving ad</string>
+    <string name="preencha_o_campo_descricao">Fill in the description field</string>
+    <string name="preencha_o_campo_telefone">Fill in the phone field</string>
+    <string name="preencha_o_campo_valor">Fill in the value field</string>
+    <string name="preencha_o_campo_titulo">Fill in the title field</string>
+    <string name="preencha_o_campo_categoria">Fill in the category field</string>
+    <string name="preencha_o_campo_estado">Fill in the state field</string>
+    <string name="selecione_pelo_menos_uma_foto">Select at least one photo!</string>
+    <string name="permicoes_negadas">Permissions Denied</string>
+    <string name="necessario_aceitar_permissoes">To use the app you need to accept the permissions</string>
+    <string name="confimar">Confirm</string>
+    <string name="preencha_a_senha">Fill in the password!</string>
+    <string name="preencha_o_email">Fill in the Email!</string>
+    <string name="anuncio_selecionado">Selected Ad</string>
+    <string name="detalhes_do_produto">Product Detail</string>
+    <string name="meus_anuncios">My Ads</string>
+    <string name="sair">Go out</string>
+    <string name="cadastrar_entrar">Register / Login</string>
+</resources>

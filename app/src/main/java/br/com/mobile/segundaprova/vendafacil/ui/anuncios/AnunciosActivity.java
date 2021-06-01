@@ -70,7 +70,7 @@ public class AnunciosActivity extends AppCompatActivity implements AnunciosContr
                             public void onItemClick(View view, int position) {
                                 Anuncio anuncioSelecionado = listaAnuncios.get( position );
                                 Intent i = new Intent(AnunciosActivity.this, DetalhesProdutoActivity.class);
-                                i.putExtra("anuncioSelecionado", anuncioSelecionado );
+                                i.putExtra(getString(R.string.anuncio_selecionado), anuncioSelecionado );
                                 startActivity( i );
                             }
 
@@ -89,7 +89,7 @@ public class AnunciosActivity extends AppCompatActivity implements AnunciosContr
     public void filtrarPorEstado(View view){
 
         AlertDialog.Builder dialogEstado = new AlertDialog.Builder(this);
-        dialogEstado.setTitle("Selecione o estado desejado");
+        dialogEstado.setTitle(R.string.selecione_o_estado_desejado);
 
         //Configurar spinner
         View viewSpinner = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
@@ -106,7 +106,7 @@ public class AnunciosActivity extends AppCompatActivity implements AnunciosContr
 
         dialogEstado.setView( viewSpinner );
 
-        dialogEstado.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        dialogEstado.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 filtroEstado = spinnerEstado.getSelectedItem().toString();
@@ -115,7 +115,7 @@ public class AnunciosActivity extends AppCompatActivity implements AnunciosContr
             }
         });
 
-        dialogEstado.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        dialogEstado.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
@@ -129,7 +129,7 @@ public class AnunciosActivity extends AppCompatActivity implements AnunciosContr
         if( filtrandoPorEstado ){
 
             AlertDialog.Builder dialogEstado = new AlertDialog.Builder(this);
-            dialogEstado.setTitle("Selecione a categoria desejada");
+            dialogEstado.setTitle(R.string.selecione_a_categoria_desejada);
 
             //Configurar spinner
             View viewSpinner = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
@@ -146,7 +146,7 @@ public class AnunciosActivity extends AppCompatActivity implements AnunciosContr
 
             dialogEstado.setView( viewSpinner );
 
-            dialogEstado.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            dialogEstado.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     filtroCategoria = spinnerCategoria.getSelectedItem().toString();
@@ -154,7 +154,7 @@ public class AnunciosActivity extends AppCompatActivity implements AnunciosContr
                 }
             });
 
-            dialogEstado.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            dialogEstado.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                 }
@@ -164,7 +164,7 @@ public class AnunciosActivity extends AppCompatActivity implements AnunciosContr
             dialog.show();
 
         }else {
-            Toast.makeText(this, "Escolha primeiro uma região!",
+            Toast.makeText(this, R.string.escolha_primeiro_uma_regiao,
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -182,7 +182,7 @@ public class AnunciosActivity extends AppCompatActivity implements AnunciosContr
     public void recuperarAnunciosPublicos() {
         dialog = new SpotsDialog.Builder()
                 .setContext( this )
-                .setMessage("Recuperando anúncios")
+                .setMessage(R.string.recuperando_anuncios)
                 .setCancelable( false )
                 .build();
         dialog.show();

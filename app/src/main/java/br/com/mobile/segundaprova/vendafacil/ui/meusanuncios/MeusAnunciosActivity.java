@@ -56,7 +56,7 @@ public class MeusAnunciosActivity extends AppCompatActivity implements MeusAnunc
                                 Anuncio anuncioSelecionado = meusAnuncios.get( position );
                                 anuncioSelecionado.setOwner(true);
                                 Intent i = new Intent(MeusAnunciosActivity.this, DetalhesProdutoActivity.class);
-                                i.putExtra("anuncioSelecionado", anuncioSelecionado );
+                                i.putExtra(getString(R.string.anuncio_selecionado), anuncioSelecionado );
                                 startActivity( i );
                             }
 
@@ -76,7 +76,7 @@ public class MeusAnunciosActivity extends AppCompatActivity implements MeusAnunc
 
         dialog = new SpotsDialog.Builder()
                 .setContext( this )
-                .setMessage("Recuperando anúncios")
+                .setMessage(getString(R.string.recuperando_anuncios))
                 .setCancelable( false )
                 .build();
         dialog.show();

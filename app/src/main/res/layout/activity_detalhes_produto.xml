@@ -23,9 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:text="Titulo"
+        android:layout_marginRight="8dp"
+        android:text="@string/titulo"
         android:textSize="16sp" />
 
     <TextView
@@ -35,7 +35,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:paddingBottom="8dp"
-        android:text="R$ 250"
+        android:text="@string/r_250_00"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -52,7 +52,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:padding="8dp"
-        android:text="SP"
+        android:text="@string/sp"
         app:drawableLeftCompat="@drawable/ic_local_24dp" />
 
     <View
@@ -69,7 +69,7 @@
         android:layout_marginRight="8dp"
         android:paddingBottom="10dp"
         android:paddingTop="8dp"
-        android:text="Descricao" />
+        android:text="@string/descricao" />
 
         <Button
             android:id="@+id/buttonVerTelefone"
@@ -78,7 +78,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:onClick="visualizarTelefone"
-            android:text="Ver telefone" />
+            android:text="@string/telefone" />
 
         <Button
             android:id="@+id/buttonEditarAnuncio"
@@ -88,7 +88,7 @@
             android:layout_marginRight="8dp"
             android:onClick="editarAnuncio"
             android:visibility="gone"
-            android:text="Editar" />
+            android:text="@string/editar" />
 
     <Button
         android:id="@+id/buttonApagarAnuncio"
@@ -99,6 +99,6 @@
         android:visibility="gone"
         android:backgroundTint="@color/colorAccent"
         android:onClick="apagarAnuncio"
-        android:text="Apagar" />
+        android:text="@string/apagar" />
 
 </LinearLayout>

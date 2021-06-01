@@ -41,7 +41,7 @@ public class EditarAnuncioActivity extends AppCompatActivity implements EditarAn
         setContentView(R.layout.activity_editar_anuncio);
 
         //Recuperar anúncio para atualizacao
-        anuncioSelecionado = (Anuncio) getIntent().getSerializableExtra("anuncioSelecionado");
+        anuncioSelecionado = (Anuncio) getIntent().getSerializableExtra(getString(R.string.anuncio_selecionado));
         //Inicializar componentes de interface
         inicializarComponentes();
         carregarDadosSpinner();
@@ -76,22 +76,22 @@ public class EditarAnuncioActivity extends AppCompatActivity implements EditarAn
                                     atualizarAnuncio();
 
                                 }else {
-                                    exibirMensagemErro("Preencha o campo descrição");
+                                    exibirMensagemErro(getString(R.string.preencha_o_campo_descricao));
                                 }
                             }else {
-                                exibirMensagemErro("Preencha o campo telefone");
+                                exibirMensagemErro(getString(R.string.preencha_o_campo_telefone));
                             }
                         }else {
-                            exibirMensagemErro("Preencha o campo valor");
+                            exibirMensagemErro(getString(R.string.preencha_o_campo_valor));
                         }
                     }else {
-                        exibirMensagemErro("Preencha o campo título");
+                        exibirMensagemErro(getString(R.string.preencha_o_campo_titulo));
                     }
                 }else {
-                    exibirMensagemErro("Preencha o campo categoria");
+                    exibirMensagemErro(getString(R.string.preencha_o_campo_categoria));
                 }
             }else {
-                exibirMensagemErro("Preencha o campo estado");
+                exibirMensagemErro(getString(R.string.preencha_o_campo_estado));
             }
 
     }

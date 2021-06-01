@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Venta fácil</string>
+    <string name="title_activity_meus_anuncios">Mis anuncios</string>
+    <string name="regiao">Región</string>
+    <string name="categoria">Categoría</string>
+    <string name="titulo">Título</string>
+    <string name="telefone">Teléfono</string>
+    <string name="descricao">Descripción</string>
+    <string name="cadastrar_anuncio">Registrar anuncio</string>
+    <string name="email">Correo electrónico</string>
+    <string name="senha">Contraseña</string>
+    <string name="login">Acceso</string>
+    <string name="cadastrar_se">Inscribirse</string>
+    <string name="acessar">Acceso</string>
+    <string name="editar">Para editar</string>
+    <string name="apagar">Borrar</string>
+    <string name="salvar_alteracoes">Guardar ediciones</string>
+    <string name="tv_lcd_philips_47_polegadas_dasd">Philips TV LCD 47 pulgadas dasd</string>
+    <string name="selecione_o_estado_desejado">Seleccione el estado deseado</string>
+    <string name="selecione_a_categoria_desejada">Seleccione la categoría deseada</string>
+    <string name="recuperando_anuncios">Recuperando anuncios</string>
+    <string name="escolha_primeiro_uma_regiao">¡Elija una región primero!</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="salvando_anuncio">guardando anuncio</string>
+    <string name="preencha_o_campo_descricao">Complete el campo de descripción</string>
+    <string name="preencha_o_campo_telefone">Complete el campo del teléfono</string>
+    <string name="preencha_o_campo_valor">Complete el campo de valor</string>
+    <string name="preencha_o_campo_titulo">Complete el campo del título</string>
+    <string name="preencha_o_campo_categoria">Complete el campo de categoría</string>
+    <string name="preencha_o_campo_estado">Complete el campo del estado</string>
+    <string name="selecione_pelo_menos_uma_foto">¡Por favor seleccione al menos una foto!</string>
+    <string name="permicoes_negadas">Permisos denegados</string>
+    <string name="necessario_aceitar_permissoes">Para utilizar la aplicación es necesario aceptar los permisos</string>
+    <string name="confimar">Confirmar</string>
+    <string name="preencha_a_senha">¡Ingrese la contraseña!</string>
+    <string name="preencha_o_email">¡Complete el correo electrónico!</string>
+    <string name="anuncio_selecionado">Detalle del producto</string>
+    <string name="detalhes_do_produto">Anuncio seleccionado</string>
+    <string name="meus_anuncios">Mis anuncios</string>
+    <string name="sair">Fuera</string>
+    <string name="cadastrar_entrar">Registro de inicio de sesión</string>
+</resources>

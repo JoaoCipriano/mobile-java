@@ -1,6 +1,48 @@
 <resources>
     <string name="app_name">Venda Fácil</string>
     <string name="title_activity_meus_anuncios">Meus anúncios</string>
+    <string name="regiao">Região</string>
+    <string name="categoria">Categoria</string>
+    <string name="titulo">Título</string>
+    <string name="telefone">Telefone</string>
+    <string name="descricao">Descrição</string>
+    <string name="cadastrar_anuncio">Cadastrar anúncio</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
+    <string name="login">Login</string>
+    <string name="cadastrar_se">Cadastrar-se</string>
+    <string name="acessar">Acessar</string>
+    <string name="sp" translatable="false">SP</string>
+    <string name="editar">Editar</string>
+    <string name="apagar">Apagar</string>
+    <string name="r_20_50" translatable="false">R$ 20,50</string>
+    <string name="r_250_00" translatable="false">R$ 250,00</string>
+    <string name="salvar_alteracoes">salvar alterações</string>
+    <string name="tv_lcd_philips_47_polegadas_dasd">Tv LCD philips 47 polegadas dasd</string>
+    <string name="selecione_o_estado_desejado">Selecione o estado desejado</string>
+    <string name="selecione_a_categoria_desejada">Selecione a categoria desejada</string>
+    <string name="recuperando_anuncios">Recuperando anúncios</string>
+    <string name="escolha_primeiro_uma_regiao">Escolha primeiro uma região!</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="salvando_anuncio">Salvando Anúncio</string>
+    <string name="preencha_o_campo_descricao">Preencha o campo descrição</string>
+    <string name="preencha_o_campo_telefone">Preencha o campo telefone</string>
+    <string name="preencha_o_campo_valor">Preencha o campo valor</string>
+    <string name="preencha_o_campo_titulo">Preencha o campo título</string>
+    <string name="preencha_o_campo_categoria">Preencha o campo categoria</string>
+    <string name="preencha_o_campo_estado">Preencha o campo estado</string>
+    <string name="selecione_pelo_menos_uma_foto">Selecione pelo menos uma foto!</string>
+    <string name="permicoes_negadas">Permissões Negadas</string>
+    <string name="necessario_aceitar_permissoes">Para utilizar o app é necessário aceitar as permissões</string>
+    <string name="confimar">Confirmar</string>
+    <string name="preencha_a_senha">Preencha a senha!</string>
+    <string name="preencha_o_email">Preencha o E-mail!</string>
+    <string name="detalhes_do_produto">Detalhes do produto</string>
+    <string name="anuncio_selecionado">Anúncio Selecionado</string>
+    <string name="meus_anuncios">Meus anúncios</string>
+    <string name="sair">Sair</string>
+    <string name="cadastrar_entrar">Cadastrar / Entrar</string>
 
     <string-array name="estados">
         <item>AC</item>

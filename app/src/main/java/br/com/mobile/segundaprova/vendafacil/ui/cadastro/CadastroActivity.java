@@ -50,11 +50,11 @@ public class CadastroActivity extends AppCompatActivity implements CadastroContr
                         }
                     } else {
 
-                        mostrarToast("Preencha a senha!");
+                        mostrarToast(getString(R.string.preencha_a_senha));
                     }
                 } else {
 
-                    mostrarToast("Preencha o E-mail!");
+                    mostrarToast(getString(R.string.preencha_o_email));
                 }
             }
         });

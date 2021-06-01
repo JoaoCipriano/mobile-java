@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="filtrarPorEstado"
-            android:text="Região"
+            android:text="@string/regiao"
             android:textColor="@color/colorPrimary" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="filtrarPorCategoria"
-            android:text="Categoria"
+            android:text="@string/categoria"
             android:textColor="@color/colorPrimary" />
     </LinearLayout>
 
