@@ -45,6 +45,7 @@
             android:name=".ui.detalhesproduto.DetalhesProdutoActivity"
             android:parentActivityName=".ui.anuncios.AnunciosActivity" />
         <activity android:name=".ui.editaranuncio.EditarAnuncioActivity" />
+        <activity android:name=".ui.sobre.SobreActivity" />
     </application>
 
 </manifest>
